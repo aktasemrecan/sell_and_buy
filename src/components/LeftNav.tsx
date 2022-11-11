@@ -1,7 +1,6 @@
 export default function LeftNav() {
   return (
     <div>
-      <div      >
         <h2 style={{ "color": "#38E54D" }} className="text-3xl font-semibold" >Catagories</h2>
         <ul style={{ "color": "#3F475F" }} className="text-xl pl-2">
           <li>-Car</li>
@@ -17,7 +16,7 @@ export default function LeftNav() {
           <li>-Truck</li>
           <li>-Tractor</li>
         </ul>
-      </div>
+      
     </div>
   )
 }

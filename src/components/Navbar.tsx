@@ -16,7 +16,7 @@ export default function Navbar() {
 
     return (
         <>
-            <div className='w-full py-1 items-center' style={{ "backgroundColor": "#3F475F" }}>
+            <div className='w-full py-1 items-center' style={{ "backgroundColor": "#38E54D" }}>
                 <div className=" flex justify-end mx-20">
                     {authReducer ? <ProfileButton/> : <LoginButton text="Login" />}
                 </div>

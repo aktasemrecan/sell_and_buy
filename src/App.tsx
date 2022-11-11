@@ -7,17 +7,19 @@ import { ToastContainer } from 'react-toastify';
 import Profile from './pages/Profile';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './firebase';
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import { loginSuccessAction } from './redux/actions';
+import AddProduct from './pages/AddProduct';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const App = () => {
 
     const dispatch = useDispatch();
-    onAuthStateChanged(auth,(user)=>{
-        if(user){
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
             dispatch(loginSuccessAction());
-        }else{
+        } else {
             dispatch(loginSuccessAction());
         }
     })
@@ -29,20 +31,22 @@ const App = () => {
                 <Route path='/' element={<HomePage />} />
                 <Route path='/profile' element={<Profile />} />
                 <Route path='/product-detail' element={<ProductDetail />} />
+                <Route path='/add-product' element={<AddProduct />} />
             </Routes>
+            
         </BrowserRouter>
         <ToastContainer
-            position="top-right"
-            autoClose={3000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="light"
-        />
+                position="bottom-right"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
     </>;
 
 }
