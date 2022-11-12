@@ -21,7 +21,7 @@ export default function HomePage() {
 
     const renderedProducts= ()=>{
         return products.map((doc:any,id:string)=>{
-            return <ProductCard advertTitle={doc.advertTitle} fuelType={doc.advertTitle} km={doc.km} power={doc.power} year={doc.year} key={id}/>
+            return <ProductCard imageURL={doc.photoURLs[0]} advertTitle={doc.advertTitle} fuelType={doc.advertTitle} km={doc.km} power={doc.power} year={doc.year} key={id}/>
         })
     };
 

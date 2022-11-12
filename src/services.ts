@@ -1,6 +1,6 @@
-import { addDoc, collection, getDocs } from "firebase/firestore";
+import { addDoc, arrayUnion, collection, doc, getDocs, updateDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
-import { db } from "./firebase";
+import { auth, db } from "./firebase";
 
 interface dataType {
     advertTitle: string,
@@ -11,11 +11,17 @@ interface dataType {
     fuelType: string,
     power: string,
     author:string,
-    timeStamp: any
+    creatingTime: any,
+    photoURLS: any
 }
 export const addVehicleFs = async (data: dataType) => {
     try {
-        await addDoc(collection(db, "vehicles"), data);
+        const newDocInfo =await addDoc(collection(db, "vehicles"), data);
+        updateDoc(doc(db,"users",auth.currentUser?.uid!),{
+            vehicleAdverts: arrayUnion(newDocInfo.id)
+        })
+
+
         toast.success("Advert has been successfully added!");
 
     } catch (err: any) {

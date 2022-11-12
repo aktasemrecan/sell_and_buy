@@ -57,12 +57,18 @@ export default function Profile() {
         photoURL: authReducer.photoURL
       });
     }
-
   }, [authReducer]);
+
+  const advertList = ()=>{
+     return null;
+  };
 
   return (
     <div className="w-full">
-      {authReducer !== null ? profileDiv() : <LoadingSpinner />}
+      {authReducer !== null ? <div>
+        <div>{profileDiv()}</div>
+        <div>{advertList()}</div>
+      </div> : <LoadingSpinner />}
     </div>
   );
 }
