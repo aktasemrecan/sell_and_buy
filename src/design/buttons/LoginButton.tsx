@@ -1,8 +1,8 @@
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { auth, db } from "../firebase";
+import { auth, db } from "../../firebase";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
-import { loginSuccessAction } from "../redux/actions";
+import { loginSuccessAction } from "../../redux/actions";
 import { addDoc, doc, getDoc, serverTimestamp, setDoc, updateDoc } from "firebase/firestore";
 
 

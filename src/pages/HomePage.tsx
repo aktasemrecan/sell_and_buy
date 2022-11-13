@@ -1,33 +1,33 @@
 import LeftNav from "../components/LeftNav";
 import ProductCard from "../components/ProductCard";
 import { getVehiclesFs } from "../services";
-import { useState , useEffect} from "react";
+import { useState, useEffect } from "react";
 import LoadingSpinner from "../components/LoadingSpinner";
 
 export default function HomePage() {
-    
 
-    const [products,setProducts]= useState<any>();
 
-    const getProducts = async()=>{
+    const [products, setProducts] = useState<any>();
+
+    const getProducts = async () => {
         const querySnapshot = await getVehiclesFs()
-        const productsArray = querySnapshot?.docs.map((doc)=>(
+        const productsArray = querySnapshot?.docs.map((doc) => (
             {
-                id: doc.id,...doc.data()
+                id: doc.id, ...doc.data()
             }
         ));
         setProducts(productsArray);
     };
 
-    const renderedProducts= ()=>{
-        return products.map((doc:any,id:string)=>{
-            return <ProductCard imageURL={doc.photoURLs[0]} advertTitle={doc.advertTitle} fuelType={doc.advertTitle} km={doc.km} power={doc.power} year={doc.year} key={id}/>
+    const renderedProducts = () => {
+        return products.map((doc: any, id: string) => {
+            return <ProductCard imageURL={doc.photoURLs[0]} advertTitle={doc.advertTitle} fuelType={doc.advertTitle} km={doc.km} power={doc.power} year={doc.year} key={id} />
         })
     };
 
-    useEffect(()=>{
+    useEffect(() => {
         getProducts();
-    },[]);
+    }, []);
 
     return (
         <div className='mx-32 flex justify-between'>
@@ -35,7 +35,7 @@ export default function HomePage() {
                 <LeftNav />
             </div>
             <div className="w-[73%] border shadow-lg px-2 pt-2 rounded-lg bg-white " >
-                {products ? renderedProducts(): <LoadingSpinner/>}
+                {products ? renderedProducts() : <LoadingSpinner />}
             </div>
         </div>
     )

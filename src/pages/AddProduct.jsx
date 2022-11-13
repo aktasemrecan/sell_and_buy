@@ -1,5 +1,5 @@
 import AddProductDiv from "../design/AddProductDiv";
-import DefaultGreenButton from "../design/DefaultGreenButton";
+import DefaultGreenButton from "../design/buttons/DefaultGreenButton";
 import { useState } from "react";
 import { addVehicleFs } from "../services";
 import { useNavigate } from "react-router";
@@ -22,7 +22,7 @@ export default function AddProduct() {
 
   const onClick = async () => {
     if (auth) {
-      if (imageUrls!==[]) {
+      if (imageUrls.length>0) {
         await addVehicleFs({
           advertTitle: advertTitle,
           companyName: companyName,
