@@ -9,20 +9,24 @@ export default function Navbar() {
 
     const navigate = useNavigate();
 
-    interface RootState{
-        authReducer:any 
+    interface RootState {
+        authReducer: any
     }
-    const authReducer = useSelector((state:RootState)=>state.authReducer);
+    const authReducer = useSelector((state: RootState) => state.authReducer);
 
     return (
         <>
-            <div className='w-full py-1 items-center bg-orange-500  ' >
-                <div className=" flex justify-end mx-20">
-                    {authReducer ? <ProfileButton/> : <LoginButton text="Login" />}
+            <div className='flex justify-end w-full py-1 items-center bg-orange-500  ' >
+                {authReducer && <><div onClick={()=>navigate("/favorites")}>
+                    <span className="text-xl items-center text-white font-sans mr-2 cursor-pointer" >Favorites</span>
+                </div>
+                    <p className="header-title text-xl text-white">|</p></>}
+                <div className="flex ml-2 mr-20">
+                    {authReducer ? <ProfileButton /> : <LoginButton text="Login" />}
                 </div>
             </div>
             <div className='sticky top-0 z-50 shadow-xl flex mb-4 w-full px-32 justify-around' style={{ "backgroundColor": "white" }}>
-                <div onClick={()=>navigate("/")} className='w-[30%] py-3 cursor-pointer'><h2 className='text-5xl header-title text-orange-500' >Sell & Buy</h2></div>
+                <div onClick={() => navigate("/")} className='w-[30%] py-3 cursor-pointer'><h2 className='text-5xl header-title text-orange-500' >Sell & Buy</h2></div>
                 <div className="w-[50%] items-center flex justify-around">
                     <NavbarButton text="Güncel"></NavbarButton>
                     <NavbarButton text="Dünya"></NavbarButton>

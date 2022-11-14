@@ -22,7 +22,8 @@ interface dataType {
     power: string,
     author: string,
     creatingTime: any,
-    photoURLS: any
+    photoURLS: any,
+    price: string
 }
 export const addVehicleFs = async (data: dataType) => {
     try {
@@ -47,6 +48,22 @@ export const getVehiclesFs = async () => {
     }
 };
 
+export const getVehicleFs = async (vehicleId: string) => {
+    try {
+        return (await getDoc(doc(db, "vehicles", vehicleId))).data();
+    } catch (err: any) {
+        toast.error("Not possible to see this vehicle!" + err.message);
+    }
+
+};
+
+export const getVehicleAuthorFs = async (vehicleAuthor: string) => {
+    try {
+        return (await getDoc(doc(db, "users", vehicleAuthor))).data();
+    } catch (err: any) {
+        toast.error("Not possible to see this vehicle's author!" + err.message);
+    }
+}
 
 export const getAdvertsFromUserFs = async () => {
     const advertLists = await getUserDocFs(auth.currentUser?.uid!).then((doc) => (doc!.vehicleAdverts));
@@ -62,4 +79,21 @@ export const deleteAdvert = async (docId: string) => {
     await updateDoc(doc(db, "users", auth.currentUser?.uid!), {
         vehicleAdverts: arrayRemove(docId)
     })
+};
+
+export const addFavoriteVehicle = async (docId:string)=>{
+    const docData = (await getDoc(doc(db,"users",auth.currentUser?.uid!))).data();
+    const favs = (docData!.favorites as Array<string>);
+    const favCheck = favs.includes(docId);
+   if(favCheck){
+    await updateDoc(doc(db,"users",auth.currentUser?.uid!),{
+        favorites: arrayRemove(docId)
+    })
+    toast("Product has been deleted from favorites!");
+   }else{
+    await updateDoc(doc(db,"users",auth.currentUser?.uid!),{
+        favorites: arrayUnion(docId)
+    })
+    toast("Product has been added to favorites!");
+   }
 };

@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 import { loginSuccessAction } from './redux/actions';
 import AddProduct from './pages/AddProduct';
 import 'react-toastify/dist/ReactToastify.css';
+import Favorites from './pages/Favorites';
 
 
 const App = () => {
@@ -30,7 +31,8 @@ const App = () => {
             <Routes>
                 <Route path='/' element={<HomePage />} />
                 <Route path='/profile' element={<Profile />} />
-                <Route path='/product-detail' element={<ProductDetail />} />
+                <Route path='/favorites' element={<Favorites />} />
+                <Route path='/vehicles/:id' element={<ProductDetail/>} />
                 <Route path='/add-product' element={<AddProduct />} />
             </Routes>
             

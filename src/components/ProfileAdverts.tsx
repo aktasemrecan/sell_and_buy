@@ -4,8 +4,11 @@ import { DocumentData } from "firebase/firestore";
 import { deleteAdvert, getAdvertsFromUserFs } from "../services";
 import DeleteButton from "../design/buttons/DeleteButton";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router";
 
 export default function ProfileAdverts() {
+
+    const navigate = useNavigate();
     const [adverts, setAdverts] = useState<any[]>();
     const getAdverts = async () => {
         const advertLists = await getAdvertsFromUserFs();
@@ -26,12 +29,12 @@ export default function ProfileAdverts() {
 
             const d = doc.data();
             <div className=" w-[40%]  shadow-lg"></div>
-            return <tr key={doc.id} className="bg-gray-100 border-b">
-                <td className=" whitespace-nowrap text-sm font-medium text-gray-900">
-                    <img className="pl-2 py-2 h-24 w-24" src={d.photoURLs[0]} alt={d.advertTitle} />
+            return <tr key={doc.id} className="bg-gray-100 border-b ">
+                <td  className="whitespace-nowrap text-sm font-medium text-gray-900">
+                    <img onClick={() => navigate(`/vehicles/${doc.id}`)} className="pl-2 py-2 h-24 w-24 cursor-pointer" src={d.photoURLs[0]} alt={d.advertTitle} />
                 </td>
-                <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                    {d.advertTitle}
+                <td onClick={() => navigate(`/vehicles/${doc.id}`)} className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap cursor-pointer">
+                    <p>{d.advertTitle}</p>
                 </td>
                 <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                     Otto

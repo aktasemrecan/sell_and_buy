@@ -17,6 +17,7 @@ export default function AddProduct() {
   const [power, setPower] = useState();
   const [km, setKm] = useState();
   const [fuelType, setFuelType] = useState();
+  const [price, setPrice] = useState();
 
   const [imageUrls, setImageUrls] = useState([]);
 
@@ -34,6 +35,7 @@ export default function AddProduct() {
           author: auth.currentUser.uid,
           creatingTime: serverTimestamp(),
           photoURLs: imageUrls,
+          price: price
         }).then(() => navigate("/"));
       }else{
         toast("Please first upload photos!");
@@ -120,6 +122,12 @@ export default function AddProduct() {
             value={fuelType}
           />
         </div>
+        <AddProductDiv
+            text="Price"
+            placeHolder="26.634 €"
+            onChange={(e) => setPrice(e.target.value)}
+            value={price}
+          />
         <p className="text-2xl">Car Photos</p>
 
         <input
