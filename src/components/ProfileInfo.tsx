@@ -42,7 +42,7 @@ export default function ProfileInfo() {
   }, [auth.currentUser]);
 
     const profileDiv = () => {
-        return <div style={{ "backgroundColor": "#3F475F" }} className="mx-auto  rounded-xl  py-8 px-10 shadow-lg">
+        return <div style={{ "backgroundColor": "#3F475F" }} className="mx-auto  rounded-xl   py-8 px-10 shadow-lg">
           <div className="w-full "><img className="w-24 h-24 mx-auto" src={photoURL} alt={name} /></div>
           <div><ProfileText text={name} secondText="Name" /></div>
           <div><ProfileText text={email} secondText="Email" /></div>

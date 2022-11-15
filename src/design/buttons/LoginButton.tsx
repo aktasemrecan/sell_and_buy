@@ -18,24 +18,24 @@ export default function LoginButton(props: Props) {
     const onClick = async () => {
         try {
             await signInWithPopup(auth, googleProvider);
-            const docControl = await getDoc(doc(db,"users",auth.currentUser?.uid!));
+            const docControl = await getDoc(doc(db, "users", auth.currentUser?.uid!));
 
-           if(!docControl.exists()){
-            setDoc(doc(db, "users", auth.currentUser?.uid!), {
-                name: auth.currentUser?.displayName,
-                email: auth.currentUser?.email,
-                emailVerified: auth.currentUser?.emailVerified,
-                phoneNumber: auth.currentUser?.phoneNumber,
-                photoURL: auth.currentUser?.photoURL,
-                creatingTime: serverTimestamp(),
-                lastSeen: serverTimestamp()
-            });
-           }else{
-            updateDoc(doc(db, "users", auth.currentUser?.uid!), {
-                lastSeen: serverTimestamp()
-            });
-            console.log("11");
-           }
+            if (!docControl.exists()) {
+                setDoc(doc(db, "users", auth.currentUser?.uid!), {
+                    name: auth.currentUser?.displayName,
+                    email: auth.currentUser?.email,
+                    emailVerified: auth.currentUser?.emailVerified,
+                    phoneNumber: auth.currentUser?.phoneNumber,
+                    photoURL: auth.currentUser?.photoURL,
+                    creatingTime: serverTimestamp(),
+                    lastSeen: serverTimestamp()
+                });
+            } else {
+                updateDoc(doc(db, "users", auth.currentUser?.uid!), {
+                    lastSeen: serverTimestamp()
+                });
+                console.log("11");
+            }
 
             dispatch(loginSuccessAction());
 
@@ -46,8 +46,8 @@ export default function LoginButton(props: Props) {
 
 
     return (
-        <button onClick={onClick} className="text-center border-2  rounded-xl py-1 px-2 text-xl" style={{
-            "borderColor": "#BCCEF8", "color": "#FAF7F0"
-        }}>{props.text}</button>
+        <button onClick={onClick} className="text-center border-2  rounded-xl py-1 px-2 text-xl text-orange-500" style={{ "borderColor": "#BCCEF8" }}>
+            {props.text}
+        </button>
     )
 }

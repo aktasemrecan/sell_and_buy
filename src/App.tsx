@@ -12,6 +12,7 @@ import { loginSuccessAction } from './redux/actions';
 import AddProduct from './pages/AddProduct';
 import 'react-toastify/dist/ReactToastify.css';
 import Favorites from './pages/Favorites';
+import Login from './pages/Login';
 
 
 const App = () => {
@@ -30,6 +31,7 @@ const App = () => {
             <Navbar />
             <Routes>
                 <Route path='/' element={<HomePage />} />
+                <Route path='/login' element={<Login />} />
                 <Route path='/profile' element={<Profile />} />
                 <Route path='/favorites' element={<Favorites />} />
                 <Route path='/vehicles/:id' element={<ProductDetail/>} />

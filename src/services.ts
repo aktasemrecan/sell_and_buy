@@ -4,9 +4,9 @@ import { auth, db } from "./firebase";
 
 
 
-export const getUserDocFs = async (userId: string) => {
+export const getUserDocFs = async () => {
     try {
-        return (await getDoc(doc(db, "users", userId))).data();
+        return (await getDoc(doc(db, "users", auth.currentUser?.uid!))).data();
     } catch (err: any) {
         toast.error("User document couldn't fetch from database!" + err.message);
     }
@@ -66,7 +66,7 @@ export const getVehicleAuthorFs = async (vehicleAuthor: string) => {
 }
 
 export const getAdvertsFromUserFs = async () => {
-    const advertLists = await getUserDocFs(auth.currentUser?.uid!).then((doc) => (doc!.vehicleAdverts));
+    const advertLists = await getUserDocFs().then((doc) => (doc!.vehicleAdverts));
 
     const result = await Promise.all(await (advertLists!.map(async (vehicleId: string) => {
         return (await getDoc(doc(db, "vehicles", vehicleId)));
@@ -81,19 +81,30 @@ export const deleteAdvert = async (docId: string) => {
     })
 };
 
-export const addFavoriteVehicle = async (docId:string)=>{
-    const docData = (await getDoc(doc(db,"users",auth.currentUser?.uid!))).data();
+export const addFavoriteVehicle = async (docId: string) => {
+    const docData = (await getDoc(doc(db, "users", auth.currentUser?.uid!))).data();
     const favs = (docData!.favorites as Array<string>);
     const favCheck = favs.includes(docId);
-   if(favCheck){
-    await updateDoc(doc(db,"users",auth.currentUser?.uid!),{
-        favorites: arrayRemove(docId)
-    })
-    toast("Product has been deleted from favorites!");
-   }else{
-    await updateDoc(doc(db,"users",auth.currentUser?.uid!),{
-        favorites: arrayUnion(docId)
-    })
-    toast("Product has been added to favorites!");
-   }
+    if (favCheck) {
+        await updateDoc(doc(db, "users", auth.currentUser?.uid!), {
+            favorites: arrayRemove(docId)
+        })
+        toast("Product has been deleted from favorites!");
+    } else {
+        await updateDoc(doc(db, "users", auth.currentUser?.uid!), {
+            favorites: arrayUnion(docId)
+        })
+        toast("Product has been added to favorites!");
+    }
+};
+
+
+export const fetchFavorites = async(userId:string)=>{
+    try {
+        const userDoc = (await getDoc(doc(db, "users", userId))).data();
+        return Promise.all(userDoc!.favorites.map(async(favId:string)=> await (await getDoc(doc(db,"vehicles",favId)))));
+    } catch (err: any) {
+        toast.error("User document couldn't fetch from database !1" + err.message);
+    }
+    
 };

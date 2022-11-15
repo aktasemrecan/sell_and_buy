@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { getVehicleFs } from "../services";
 import LoadingSpinner from "../components/LoadingSpinner";
 import ProductDetailAuthor from "../components/ProductDetailAuthor";
+import ProductDetailSlider from "../components/ProductDetailSlider";
 
 
 export default function ProductDetail() {
@@ -26,7 +27,8 @@ export default function ProductDetail() {
             </h2>
             <div className="flex">
                 <div className="w-[44%]">
-                    <img className="h-96 rounded-lg w-full object-contain" src={vehicleData.photoURLs[0]} alt="car" />
+                    {/* <img className="h-96 rounded-lg w-full object-contain" src={vehicleData.photoURLs[0]} alt="car" /> */}
+                    <ProductDetailSlider advertTitle={vehicleData.advertTitle} photos={vehicleData.photoURLs}/>  
                 </div>
                 <div className="w-[52%] flex justify-around items-center">
                     <div className="pl-8 w-[49%] ">
@@ -51,7 +53,7 @@ export default function ProductDetail() {
                             <p>Color: Yellow</p>
                         </div>
                     </div>
-                    <ProductDetailAuthor authorId={vehicleData.author}/>
+                    <ProductDetailAuthor authorId={vehicleData.author} />
                 </div>
             </div>
         </div>

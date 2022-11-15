@@ -13,7 +13,7 @@ export default function FavoriteButton(props: Props) {
             await addFavoriteVehicle(props.productId);
            
         } catch (err:any) {
-            toast.error("Product has been not successfully added to favorites!"+err.message);
+            toast.error("Product has been not added to favorites!"+err.message);
         }
     };
 

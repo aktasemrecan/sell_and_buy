@@ -3,6 +3,7 @@ import ProductCard from "../components/ProductCard";
 import { getVehiclesFs } from "../services";
 import { useState, useEffect } from "react";
 import LoadingSpinner from "../components/LoadingSpinner";
+import HomePageSearch from "../components/HomePageSearch";
 
 export default function HomePage() {
 
@@ -30,6 +31,8 @@ export default function HomePage() {
     }, []);
 
     return (
+        <>
+        {/* <HomePageSearch/> */}
         <div className='mx-32 flex justify-between'>
             <div className="w-[24%] border px-2 py-3 rounded-lg bg-white" >
                 <LeftNav />
@@ -38,5 +41,6 @@ export default function HomePage() {
                 {products ? renderedProducts() : <LoadingSpinner />}
             </div>
         </div>
+        </>
     )
 }
