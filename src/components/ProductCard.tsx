@@ -24,7 +24,7 @@ export default function ProductCard(props: dataType) {
         <div>
             <div className="flex p-2 justify-between relative">
                 <div className="flex">
-                    <div className="max-w-6xl items-center ">
+                    <div className="min-w-6xl max-w-6xl items-center ">
                         <img onClick={() => navigate(`/vehicles/${props.productId}`)} className="cursor-pointer w-64 h-52 object-contain" src={props.imageURL} alt="car" />
                     </div>
                     <div className="w-full space-y-6 pl-4">

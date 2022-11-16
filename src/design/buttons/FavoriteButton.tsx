@@ -9,11 +9,13 @@ interface Props {
 export default function FavoriteButton(props: Props) {
 
     const onClick = async()=>{
-        try {
-            await addFavoriteVehicle(props.productId);
-           
-        } catch (err:any) {
-            toast.error("Product has been not added to favorites!"+err.message);
+        if(props.productId){
+            try {
+                await addFavoriteVehicle(props.productId);
+               
+            } catch (err:any) {
+                toast.error("Product has been not added to favorites!"+err.message);
+            }
         }
     };
 

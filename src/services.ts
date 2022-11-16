@@ -1,4 +1,4 @@
-import { addDoc, arrayRemove, arrayUnion, collection, deleteDoc, doc, getDoc, getDocs, updateDoc } from "firebase/firestore";
+import { addDoc, arrayRemove, arrayUnion, collection, deleteDoc, doc, DocumentData, getDoc, getDocs, onSnapshot, orderBy, query, updateDoc, where } from "firebase/firestore";
 import { toast } from "react-toastify";
 import { auth, db } from "./firebase";
 
@@ -107,4 +107,12 @@ export const fetchFavorites = async(userId:string)=>{
         toast.error("User document couldn't fetch from database !1" + err.message);
     }
     
+};
+
+export const fetchQuery = async(term:string)=>{
+    const searchRef = query(collection(db,"vehicles"),where("advertTitle",">=",term),orderBy("advertTitle", "asc"));
+    
+    onSnapshot(searchRef,(snapshot)=>{
+        snapshot.docs.map((doc:DocumentData)=>console.log(doc.data()))
+    })
 };
